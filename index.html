@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Restaurante</title>
+    <style>
+
+        img{
+            display: block;
+            margin: 0 auto;
+            border-radius: 80px;
+        }
+
+        main>section>article>img{
+            display: block;
+            border-radius: 50px;
+            width: 10cm;
+        }
+
+        header{
+            text-align: center;
+        }
+        h1{
+            display: inline-block;  
+            margin: 10px auto;
+            padding: 12px 100px;
+            background-color:saddlebrown;
+            color:burlywood;
+            border-radius: 20px;
+        }
+
+        #order-form {
+    text-align: center;
+}
+
+form {
+    display: inline-block; 
+    text-align: center; 
+    margin-bottom: 15px;
+}
+
+nav>ul {
+    list-style: none;  
+    padding: 0;
+    text-align: center; 
+}
+
+nav>ul>li {
+    display: inline-block;  
+    padding: 12px 80px;
+    background-color: saddlebrown;
+    color: burlywood;
+    border-radius: 10px;
+    margin: 0px; 
+}
+
+#menu {
+    text-align: center;
+}
+
+
+main{
+    color: burlywood;
+}
+
+body{
+    background-color: rgb(255, 172, 113);
+    padding: 5px;  
+    margin: auto; 
+    width: 40%;
+}
+
+div{
+    background-color: rgb(71, 36, 14);
+    padding: 20px;  
+    margin: 20px auto; 
+    border-radius: 50px;
+}
+
+    </style>
+</head>
+<div>
+<body>
+    <header>
+        <img src="https://myplate-prod.azureedge.us/sites/default/files/styles/large/public/2020-11/SkilletPastaDinner_527x323.jpg?itok=SxmNNwfM" id="header-img"/>
+        <h1>Lukychill's Restaurant</h1>
+        <nav>
+            <ul>
+                <li><a href="#menu" style="color:burlywood">Menu</a></li>
+                <li><a href="#order-form" style="color:burlywood">Order</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="menu">
+            <h2>Menu</h2>
+            <article>
+                <img src="https://www.lavanguardia.com/files/article_main_microformat/files/fp/uploads/2020/09/09/5f58b1bb6d322.r_d.627-418-0.jpeg" alt="spaghetti"> 
+            </article>
+            <article>
+                <h3>Spaghetti Bolognesa</h3>
+            </article>
+            <article>
+                <p>
+                    A rich and savory slow-cooked meat sauce with tomatoes, herbs, and a touch of red wine, served over al dente spaghetti.
+                </p>
+                <h3><i>$42,00</i></h3>
+            </article>
+        </section>
+        
+        <section id="order-form">
+            
+                <form>
+                    <label>Quantity</label><br>
+                    <input type="number" min="0" max="4">
+                </form>
+            <br><br>
+                <form>
+                    <label>Add-ons</label><br>
+                    <input type="radio" name="add-ons"> Parmesan cheese
+                    <input type="radio" name="add-ons"> Garlic butter shrimp
+                    <input type="radio" name="add-ons"> Sun-dried tomatoes
+                </form>
+            <br><br>
+                <form>
+                    <label>Special Request</label><br>
+                    <textarea rows="7" cols="40" placeholder="Ask for your special request here" maxlenght="300"></textarea>
+                </form>
+<br><br>
+                <form>
+                    <label>Checkout</label><br>
+                    <input type="button" value="Go to Checkout">
+                </form>
+        </section>
+    </main>
+
+</body>
+<footer>
+    <p>Made with love by Lukychill</p>
+</footer>
+</div>
+</html>
