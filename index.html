@@ -265,14 +265,14 @@
   <section id="order-form">
     <form onsubmit="return validateForm()">
       <label for="quantity">Quantity</label><br>
-      <input type="number" id="quantity" name="quantity" min="0" max="4"><br><br>
+      <input type="number" id="quantity" name="quantity" min="1" max="4"><br><br>
 
       <label><strong>Add-ons</strong></label><br>
-      <label for="parmesan">Parmesan cheese</label>
+      <label for="parmesan">Parmesan cheese (5$)</label>
       <input type="radio" id="parmesan" name="add-ons" value="Parmesan"><br>
-      <label for="shrimp">Garlic butter shrimp</label>
+      <label for="shrimp">Garlic butter shrimp (10$)</label>
       <input type="radio" id="shrimp" name="add-ons" value="Garlic shrimp"><br>
-      <label for="tomatoes">Sun-dried tomatoes</label>
+      <label for="tomatoes">Sun-dried tomatoes (7$)</label>
       <input type="radio" id="tomatoes" name="add-ons" value="Sun-dried tomatoes"><br><br>
 
       <label for="special-request">Special Request</label><br>
@@ -293,44 +293,59 @@
     const articles = document.querySelectorAll('article');
     let selectedArticle = null;
   
+    // Selección visual de los platos
     articles.forEach(article => {
       article.addEventListener('click', () => {
         articles.forEach(a => a.classList.remove('selected'));
         article.classList.add('selected');
-        selectedArticle = article.getAttribute('data-id');
+        selectedArticle = article;
       });
     });
   
     function validateForm() {
-  if (!selectedArticle) {
-    alert("Please select a dish before proceeding.");
-    return false;
-  }
-
-  const selectedElement = document.querySelector(`article[data-id="${selectedArticle}"]`);
-  const dishName = selectedElement.querySelector('h3').innerText;
-  const quantity = document.getElementById("quantity").value || 0;
-  const addOn = document.querySelector('input[name="add-ons"]:checked');
-  const specialRequest = document.getElementById("special-request").value.trim();
-
-  if (quantity == 0) {
-    alert("Please enter a quantity.");
-    return false;
-  }
-
-  const summary = `
-    <div class="summary-box">
-      <h3>🧾 Order Summary</h3>
-      <p><strong>Dish:</strong> ${dishName}</p>
-      <p><strong>Quantity:</strong> ${quantity}</p>
-      <p><strong>Add-on:</strong> ${addOn ? addOn.value : "None"}</p>
-      ${specialRequest ? `<p><strong>Special Request:</strong> ${specialRequest}</p>` : ""}
-    </div>
-  `;
-
-  document.getElementById("order-summary").innerHTML = summary;
-  return false; // Evita recargar la página
-}
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const addOnInput = document.querySelector('input[name="add-ons"]:checked');
+      const specialRequest = document.getElementById('special-request').value;
+  
+      const summaryBox = document.getElementById('order-summary');
+  
+      // Validaciones básicas
+      if (!selectedArticle) {
+        alert("Please select a dish from the menu.");
+        return false;
+      }
+  
+      if (!quantity || quantity <= 0) {
+        alert("Please enter a quantity between 1 and 4.");
+        return false;
+      }
+  
+      const itemName = selectedArticle.querySelector('h3').textContent;
+      const itemPriceText = selectedArticle.querySelector('i').textContent.replace('$', '').replace(',', '.');
+      const itemPrice = parseFloat(itemPriceText);
+  
+      // Precio del add-on (puede ajustarse si querés)
+      let addOn = addOnInput ? addOnInput.value : "None";
+      let addOnPrice = 0;
+      if (addOn === "Parmesan") addOnPrice = 5;
+      else if (addOn === "Garlic shrimp") addOnPrice = 10;
+      else if (addOn === "Sun-dried tomatoes") addOnPrice = 7;
+  
+      const finalPrice = (itemPrice + addOnPrice) * quantity;
+  
+      summaryBox.innerHTML = `
+        <div class="summary-box">
+          <h3>📜 Order Summary</h3>
+          <p><strong>Dish:</strong> ${itemName}</p>
+          <p><strong>Quantity:</strong> ${quantity}</p>
+          <p><strong>Add-on:</strong> ${addOn} (${addOnPrice > 0 ? `$${addOnPrice.toFixed(2)}` : 'No extra cost'})</p>
+          <p><strong>Special Request:</strong> ${specialRequest || 'None'}</p>
+          <p><strong>Final payment:</strong> $${finalPrice.toFixed(2)}</p>
+        </div>
+      `;
+  
+      return false; // Prevenir envío real del formulario
+    }
   </script>
   
 </body>
