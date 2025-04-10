@@ -1,129 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Restaurante</title>
-    <style>
-        img{
-            display: block;
-            margin: 0 auto;
-            border-radius: 80px;
-        }
-        main>section>article>img{
-            display: block;
-            border-radius: 50px;
-            width: 10cm;
-        }
-        header{
-            text-align: center;
-        }
-        h1{
-            display: inline-block;  
-            margin: 10px auto;
-            padding: 12px 100px;
-            background-color:saddlebrown;
-            color:burlywood;
-            border-radius: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Restaurante</title>
+  <style>
+    body {
+      background-color: rgb(255, 172, 113);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: space-between;
+      font-family: 'Arial', sans-serif;
+    }
 
-        #order-form {
-    text-align: center;
+    header {
+      text-align: center;
+      flex-shrink: 0;
+      height: 160px;
+    }
+
+    h1 {
+      display: inline-block;
+      margin: auto;
+      margin-top: 25px;
+      padding: 12px 100px;
+      background-color: saddlebrown;
+      color: burlywood;
+      border-radius: 20px;
+      box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 15px 15px;
+    }
+
+    nav ul li a {
+      display: inline-block;
+      padding: 12px 40px;
+      background-color: saddlebrown;
+      color: burlywood;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background-color: rgba(148, 89, 12, 0.719);
+      color: saddlebrown;
+      transform: scale(1.05);
+    }
+
+    nav ul li a:active {
+      transform: scale(0.97);
+    }
+
+    #menu {
+      text-align: center;
+      background-color: saddlebrown;
+      padding: 10px 0;
+      margin-top: 20px;
+      z-index: 1;
+    }
+
+    #menu h2 {
+      display: inline-block;
+      padding: 15px 30px;
+      color: burlywood;
+      font-size: 1.5rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    article {
+      background-color: rgb(102, 51, 0);
+      padding: 10px 15px;
+      width: 250px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      height: 300px;
+      text-align: center;
+    }
+
+    article:hover {
+      background-color: rgba(199, 132, 65, 0.733);
+      transform: scale(1.05);
+    }
+
+    article.selected {
+      background-color: rgb(102, 51, 0);
+      border: 4px solid burlywood;
+      box-shadow: 0 0 12px 4px burlywood;
+    }
+
+    article img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    article h3 {
+      color: rgb(243, 203, 150);
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    article p {
+      color: rgb(202, 156, 94);
+    }
+
+    #order-form {
+      background-color: #f8f8f8;
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 30px;
+      text-align: center;
+      color: #333;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #order-form form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #order-form label {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    #order-form textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 80%;
+      resize: vertical;
+      margin-bottom: 15px;
+      transition: border 0.3s ease;
+    }
+
+    #order-form textarea:focus {
+      border-color: saddlebrown;
+    }
+
+    #order-form input[type="number"],
+    #order-form input[type="radio"] {
+      margin-bottom: 10px;
+    }
+
+    #order-form input[type="submit"] {
+      background-color: saddlebrown;
+      color: burlywood;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    #order-form input[type="submit"]:hover {
+      background-color: burlywood;
+      color: saddlebrown;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: saddlebrown;
+      color: burlywood;
+      flex-shrink: 0;
+    }
+
+    #order-summary {
+  margin-top: 30px;
+  color: saddlebrown;
+  background-color: #ffe7cd;
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-form {
-    display: inline-block; 
-    text-align: center; 
-    margin-bottom: 15px;
+
+.summary-box h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: saddlebrown;
 }
-nav>ul {
-    list-style: none;  
-    padding: 0;
-    text-align: center; 
-}
-nav>ul>li {
-    display: inline-block;  
-    padding: 12px 80px;
-    background-color: saddlebrown;
-    color: burlywood;
-    border-radius: 10px;
-    margin: 0px; 
-}
-#menu {
-    text-align: center;
-}
-main{
-    color: burlywood;
-}
-body{
-    background-color: rgb(255, 172, 113);
-    padding: 5px;  
-    margin: auto; 
-    width: 40%;
-}
-div{
-    background-color: rgb(71, 36, 14);
-    padding: 20px;  
-    margin: 20px auto; 
-    border-radius: 50px;
-}
-    </style>
+
+  </style>
 </head>
-<div>
 <body>
-    <header>
-        <img src="https://myplate-prod.azureedge.us/sites/default/files/styles/large/public/2020-11/SkilletPastaDinner_527x323.jpg?itok=SxmNNwfM" id="header-img"/>
-        <h1>Lukychill's Restaurant</h1>
-        <nav>
-            <ul>
-                <li><a href="#menu" style="color:burlywood">Menu</a></li>
-                <li><a href="#order-form" style="color:burlywood">Order</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="menu">
-            <h2>Menu</h2>
-            <article>
-                <img src="https://www.lavanguardia.com/files/article_main_microformat/files/fp/uploads/2020/09/09/5f58b1bb6d322.r_d.627-418-0.jpeg" alt="spaghetti"> 
-            </article>
-            <article>
-                <h3>Spaghetti Bolognesa</h3>
-            </article>
-            <article>
-                <p>
-                    A rich and savory slow-cooked meat sauce with tomatoes, herbs, and a touch of red wine, served over al dente spaghetti.
-                </p>
-                <h3><i>$42,00</i></h3>
-            </article>
-        </section>
-        <section id="order-form">
-                <form>
-                    <label>Quantity</label><br>
-                    <input type="number" min="0" max="4">
-                </form>
-            <br><br>
-                <form>
-                    <label>Add-ons</label><br>
-                    <input type="radio" name="add-ons"> Parmesan cheese
-                    <input type="radio" name="add-ons"> Garlic butter shrimp
-                    <input type="radio" name="add-ons"> Sun-dried tomatoes
-                </form>
-            <br><br>
-                <form>
-                    <label>Special Request</label><br>
-                    <textarea rows="7" cols="40" placeholder="Ask for your special request here" maxlenght="300"></textarea>
-                </form>
-<br><br>
-                <form>
-                    <label>Checkout</label><br>
-                    <input type="button" value="Go to Checkout">
-                </form>
-        </section>
-    </main>
+  <header>
+    <h1>Lukychill's Restaurant</h1>
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#order-form">Order</a></li>
+      </ul>
+    </nav>
+  </header>
 
-</body>
-<footer>
+  <div id="menu">
+    <h2>Menu</h2>
+    <section>
+      <article data-id="1">
+        <img src="https://www.lavanguardia.com/files/article_main_microformat/files/fp/uploads/2020/09/09/5f58b1bb6d322.r_d.627-418-0.jpeg" alt="spaghetti" />
+        <h3>Spaghetti Bolognesa</h3>
+        <p>Classic Italian pasta with a hearty beef and tomato sauce, slow-cooked with onions, garlic, and herbs to create a comforting and flavorful meal.</p>
+        <h3><i>$42,00</i></h3>
+      </article>
+
+      <article data-id="2">
+        <img src="https://www.hola.com/horizon/square/608003c5c94c-pastapesto-adob-t.jpg?im=Resize=(640),type=downsize" alt="pastaalpesto" />
+        <h3>Spaghetti al Pesto</h3>
+        <p>Delicate spaghetti tossed in a fragrant basil pesto sauce made with fresh herbs, garlic, pine nuts, Parmesan, and a splash of olive oil.</p>
+        <h3><i>$52,00</i></h3>
+      </article>
+
+      <article data-id="3">
+        <img src="https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/02A7A0B8-4298-416D-B36B-B9409226ABF2/Derivates/244BC83A-A48A-40A8-8996-BE9F8DF73AB6.jpg" alt="ravioli" />
+        <h3>Ravioli</h3>
+        <p>Handmade pasta pockets filled with creamy ricotta and spinach, served with your choice of a light butter-sage sauce or hearty tomato base.</p>
+        <h3><i>$80,00</i></h3>
+      </article>
+    </section>
+  </div>
+
+  <section id="order-form">
+    <form onsubmit="return validateForm()">
+      <label for="quantity">Quantity</label><br>
+      <input type="number" id="quantity" name="quantity" min="0" max="4"><br><br>
+
+      <label><strong>Add-ons</strong></label><br>
+      <label for="parmesan">Parmesan cheese</label>
+      <input type="radio" id="parmesan" name="add-ons" value="Parmesan"><br>
+      <label for="shrimp">Garlic butter shrimp</label>
+      <input type="radio" id="shrimp" name="add-ons" value="Garlic shrimp"><br>
+      <label for="tomatoes">Sun-dried tomatoes</label>
+      <input type="radio" id="tomatoes" name="add-ons" value="Sun-dried tomatoes"><br><br>
+
+      <label for="special-request">Special Request</label><br>
+      <textarea id="special-request" name="special-request" rows="7" cols="40" placeholder="Ask for your special request here" maxlength="300"></textarea><br><br>
+
+      <input type="submit" value="Go to Checkout">
+    </form>
+
+    <div id="order-summary"></div>
+
+  </section>
+
+  <footer>
     <p>Made with love by Lukychill</p>
-</footer>
-</div>
+  </footer>
+
+  <script>
+    const articles = document.querySelectorAll('article');
+    let selectedArticle = null;
+  
+    articles.forEach(article => {
+      article.addEventListener('click', () => {
+        articles.forEach(a => a.classList.remove('selected'));
+        article.classList.add('selected');
+        selectedArticle = article.getAttribute('data-id');
+      });
+    });
+  
+    function validateForm() {
+  if (!selectedArticle) {
+    alert("Please select a dish before proceeding.");
+    return false;
+  }
+
+  const selectedElement = document.querySelector(`article[data-id="${selectedArticle}"]`);
+  const dishName = selectedElement.querySelector('h3').innerText;
+  const quantity = document.getElementById("quantity").value || 0;
+  const addOn = document.querySelector('input[name="add-ons"]:checked');
+  const specialRequest = document.getElementById("special-request").value.trim();
+
+  if (quantity == 0) {
+    alert("Please enter a quantity.");
+    return false;
+  }
+
+  const summary = `
+    <div class="summary-box">
+      <h3>🧾 Order Summary</h3>
+      <p><strong>Dish:</strong> ${dishName}</p>
+      <p><strong>Quantity:</strong> ${quantity}</p>
+      <p><strong>Add-on:</strong> ${addOn ? addOn.value : "None"}</p>
+      ${specialRequest ? `<p><strong>Special Request:</strong> ${specialRequest}</p>` : ""}
+    </div>
+  `;
+
+  document.getElementById("order-summary").innerHTML = summary;
+  return false; // Evita recargar la página
+}
+  </script>
+  
+</body>
 </html>
